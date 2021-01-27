@@ -1,0 +1,338 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+    .description_separator {
+        padding: 8px;
+        font-weight: 400;
+        text-align: left;
+        background: #343a40;
+        color: #fff;
+    }
+
+</style>
+
+<h3 style="color:green; text-align:center;">{{ msg }}</h3>
+
+<section class="content">
+    <div aria-labelledby="add-tab" class="tab-pane fade show active" id="add_product" role="tabpanel">
+        <form id="product_form" method="post" enctype="multipart/form-data" action="{% url 'insect:add_new_insect' %}">
+            <div class="card-body">
+                <h4 class="description_separator">Technology Info</h4><br>
+<!--                <div class="form-group">-->
+<!--                    <label for="supplier_id">Supplier ID</label>-->
+<!--                    &lt;!&ndash; TODO: revert back to username here &ndash;&gt;-->
+<!--                    <input class="form-control" id="supplier_id" name="supplier_id" placeholder="Enter Supplier ID"-->
+<!--                           readonly type="text" value="{{request.session.username}}">-->
+<!--                </div>-->
+                <div class="form-group">
+                    <label for="name">Technology Name</label>
+                    <input class="form-control" id="name" name="name" placeholder="Enter Technology name" required
+                           type="text">
+                </div>
+                <div class="form-group">
+                    <label for="donor_name">Name of the Technology Donor and Partner</label>
+                    <input class="form-control" id="donor_name" name="donor_name"
+                           placeholder="Enter Technology Donor and Partner"
+                           type="text">
+                </div>
+                <div class="form-group">
+                    <label>Type of Donor</label>
+                    <select class="form-control" id="donor_type" name="donor_type">
+                        <option>CSR</option>
+                        <option>Donor Funded</option>
+                        <option>Crowd Funded</option>
+                        <option>Government</option>
+                        <option>Others</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Technology Category</label>
+                    <select class="form-control" id="category" name="category">
+                        <option>Agriculture</option>
+                        <option>Art & Craft</option>
+                        <option>Clothes</option>
+                        <option>Education</option>
+                        <option>Environment</option>
+                        <option>Healthcare</option>
+                        <option>ICT</option>
+                        <option>Recycling</option>
+                        <option>Sanitation</option>
+                        <option>Skills Development</option>
+                        <option>Solar</option>
+                        <option>Sports</option>
+                        <option>Water</option>
+                        <option>Others</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="description">Technology Description</label>
+                    <textarea class="form-control" id="description" name="description"
+                              placeholder="Enter Technology Description" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="video">Technology Video</label>
+                    <div class="input-group">
+                        <div class="custom-file">
+                            <input accept="video/*"  id="video" name="video" type="file">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="images1">Image1</label>
+                    <div class="input-group">
+                        <div class="custom-file">
+                            <input accept="image/*"  id="images1" name="images1" type="file">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="images2">Image2</label>
+                    <div class="input-group">
+                        <div class="custom-file">
+                            <input accept="image/*"  id="images2" name="images2" type="file">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="images3">Image1</label>
+                    <div class="input-group">
+                        <div class="custom-file">
+                            <input accept="image/*"  id="images3" name="images3" type="file">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="images4">Image4</label>
+                    <div class="input-group">
+                        <div class="custom-file">
+                            <input accept="image/*"  id="images4" name="images4" type="file">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="images5">Image5</label>
+                    <div class="input-group">
+                        <div class="custom-file">
+                            <input accept="image/*"  id="images5" name="images5" type="file">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="brochuer">Technology Brochure</label>
+                    <div class="input-group">
+                        <div class="custom-file">
+                            <input accept=".xlsx,.xls,.doc,.docx,.txt,.pdf"  id="brochuer"
+                                   name="brochuer"
+                                   type="file">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="features">Unique Features of the Solution/equipment - How is it different than what is
+                        available in the market</label>
+                    <textarea class="form-control" id="features" name="features" placeholder="Unique Features"
+                              required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Current Stage</label>
+                    <select class="form-control" id="stage" name="stage">
+                        <option>DESIGN</option>
+                        <option>PROTOTYPE</option>
+                        <option>APPROVAL</option>
+                        <option>PRODUCT IN MARKET</option>
+                        <option>READY FOR MASS PRODUCTION</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>6C Category</label>
+                    <select class="form-control" id="category_6c" name="category_6c">
+                        <option value="Construct">Construct</option>
+                        <option value="Capacity">Capacity</option>
+                        <option value="Create">Create</option>
+                        <option value="Channel">Channel</option>
+                        <option value="Connect">Connect</option>
+                        <option value="Capital">Capital</option>
+                    </select>
+                </div>
+<!--                <div class="form-group">-->
+<!--                    <label for="approved_by">Approved by (or Mention the Stage of Approval) - including Farmers-->
+<!--                        Evaluation</label>-->
+<!--                    <input class="form-control" id="approved_by" name="approved_by" placeholder="Approved by"-->
+<!--                           required type="text">-->
+<!--                </div>-->
+                <div class="form-group">
+                    <label for="target_price">Targeted Price per Unit</label>
+                    <input class="form-control" id="target_price" name="target_price" placeholder="Enter targeted price"
+                           required type="text">
+                </div>
+                <div class="form-group">
+                    <label for="time_to_market">Tentative Time to Go to Market(in months)</label>
+                    <input class="form-control" id="time_to_market" name="time_to_market"
+                           placeholder="Enter tentative time"
+                           required type="text">
+                </div>
+                <h4 class="description_separator">SHG info</h4><br>
+                <div class="form-group">
+                    <label for="process">Please Indicate Process Followed to Obtain the Problem Statement for Which the
+                        Solution Has Been Developed. Also Name the Sample from the Target Group for Whom You Have
+                        Developed Your Technology(geography & Exact Shg/fpo Would Be Preferred)</label>
+                    <input class="form-control" id="process" name="process" placeholder="Enter process followed"
+                           required type="text">
+                </div>
+                <div class="form-group">
+                    <label for="fpo_name">SHG Name</label>
+                    <input class="form-control" id="fpo_name" name="fpo_name" placeholder="Enter SHG name"
+                           required type="text">
+                </div>
+                <div class="form-group">
+                    <label for="fpo_email">SHG Email</label>
+                    <input class="form-control" id="fpo_email" name="fpo_email" placeholder="Enter SHG email"
+                           required type="email">
+                </div>
+                <div class="form-group">
+                    <label for="fpo_mobile">SHG Mobile</label>
+                    <input class="form-control" id="fpo_mobile" name="fpo_mobile" placeholder="Enter SHG mobile"
+                           required type="text">
+                </div>
+                <div class="form-group">
+                    <label for="client_reference">References of Clients That Are Satisfied with Your
+                        Technology</label>
+                    <input class="form-control" id="client_reference" name="client_reference"
+                           placeholder="Enter process followed"
+                           required type="text">
+                </div>
+                <h4 class="description_separator">Client info</h4><br>
+                <div class="form-group">
+                    <label for="founder_name">Founder Name</label>
+                    <input class="form-control" id="founder_name" name="founder_name" placeholder="Enter founder name"
+                           required type="text">
+                </div>
+                <div class="form-group">
+                    <label for="founder_email">Founder Email</label>
+                    <input class="form-control" id="founder_email" name="founder_email"
+                           placeholder="Enter founder email"
+                           required type="email">
+                </div>
+                <div class="form-group">
+                    <label for="founder_mobile">Founder Mobile</label>
+                    <input class="form-control" id="founder_mobile" name="founder_mobile"
+                           placeholder="Enter founder mobile"
+                           required type="text">
+                </div>
+                <div class="form-group">
+                    <label for="spoc_name">Single Point of Contact Name</label>
+                    <input class="form-control" id="spoc_name" name="spoc_name"
+                           placeholder="Enter single point of contact name"
+                           required type="text">
+                </div>
+                <div class="form-group">
+                    <label for="spoc_email">Single Point of Contact Email</label>
+                    <input class="form-control" id="spoc_email" name="spoc_email"
+                           placeholder="Enter single point of contact email"
+                           required type="email">
+                </div>
+                <div class="form-group">
+                    <label for="spoc_mobile">Single Point of Contact Mobile</label>
+                    <input class="form-control" id="spoc_mobile" name="spoc_mobile"
+                           placeholder="Enter single point of contact mobile"
+                           required type="text">
+                </div>
+                <div class="form-group">
+                    <label for="survey">Market Survey Undertaken for Similar Solutions/equipment - What Is Available in
+                        the Market</label>
+                    <textarea class="form-control" id="survey" name="survey" placeholder="Survey" required></textarea>
+                </div>
+                <h4 class="description_separator">Others</h4><br>
+                <div class="form-group">
+                    <label for="funding_support">Please Identify If Support Is Sought for Funding for
+                        Research/prototype/commercialization/early Stage Funding/accelerator/deployment/government
+                        Order/training or Deployment Thru Ngos?/technology Transfer</label>
+                    <input class="form-control" id="funding_support" name="funding_support"
+                           placeholder="Enter support details"
+                           required type="text">
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" id="connected_gov_agency" name="connected_gov_agency"
+                           onclick="showField()" type="checkbox">
+                    <label class="form-check-label" for="connected_gov_agency">Are You Already Connected to Any
+                        Government Agency/ Any Government Orders?</label>
+                </div>
+                <div class="form-group">
+                    <label for="agency_detail">Please Provide Name and Details of Government Agency That You Are
+                        Catering To. Challenges If Any:</label>
+                    <input class="form-control" id="agency_detail" name="agency_detail"
+                           placeholder="Enter government agency details"
+                           style="display:none" type="text">
+                </div>
+                <div class="form-group">
+                    <label for="training_details">Training - How Have You Thought through the Training of Your
+                        Equipment/solution. What Support in Training Will Be Required?</label>
+                    <input class="form-control" id="training_details" name="training_details"
+                           placeholder="Enter training details"
+                           required type="text">
+                </div>
+                <div class="form-group">
+                    <label for="technology_transfer">Would You like to Undertake a Technology Transfer Rather than
+                        Manufacture and Be in the Market?</label>
+                    <input class="form-control" id="technology_transfer" name="technology_transfer"
+                           placeholder="Enter technology transfer details"
+                           required type="text">
+                </div>
+                <div class="form-group">
+                    <label for="technology_transfer_condition">What Would Be Your Primary Rate Range &
+                        Conditions?</label>
+                    <input class="form-control" id="technology_transfer_condition" name="technology_transfer_condition"
+                           placeholder="Enter conditions" required type="text">
+                </div>
+                <div class="form-group">
+                    <label for="tech_impl_period">Can You Implement the Technology for the next Few Years?</label>
+                    <input class="form-control" id="tech_impl_period" name="tech_impl_period"
+                           placeholder="Enter technology implementation details"
+                           required type="text">
+                </div>
+                <div class="form-group">
+                    <label for="annual_maintenance">What Would Be the Annual Maintenance and Other Costs
+                        Involved?</label>
+                    <input class="form-control" id="annual_maintenance" name="annual_maintenance"
+                           placeholder="Enter cost details"
+                           required type="text">
+                </div>
+                <div class="form-group">
+                    <label for="ngo_parter">Do You Have an NGO Partner or Would You Requreone to Undertake the
+                        Implementation?</label>
+                    <input class="form-control" id="ngo_parter" name="ngo_parter"
+                           placeholder="Enter NGO partner details"
+                           required type="text">
+                </div>
+                <div class="form-group">
+                    <label for="treat_patient">How Would You like to Treat the Patent? Will It Be a Public Patent If
+                        Innovation Is Supported through CSR or Foundation? or a Joint Patent with the Funding
+                        Agency?</label>
+                    <input class="form-control" id="treat_patient" name="treat_patient"
+                           placeholder="Enter patent details"
+                           required type="text">
+                </div>
+            </div>
+            <!-- /.card-body -->
+            <div class="card-footer" style="text-align:center;">
+                <button class="btn btn-primary" type="submit" style="background-color:#343a40;border-color:#343a40;">Submit</button>
+            </div>
+        </form>
+    </div>
+</section>
+<script>
+$(document).ready(function () {
+bsCustomFileInput.init();
+});
+</script>
+<script>
+function showField(){
+  var checkBox = document.getElementById("connected_gov_agency");
+  var text = document.getElementById("agency_detail");
+  if (checkBox.checked == true)
+    text.style.display = "block";
+  else
+    text.style.display = "none";
+}
+</script>
+{% endblock %}

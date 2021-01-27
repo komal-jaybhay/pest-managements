@@ -74,7 +74,8 @@ def get_insects(path, media_root, from_number, uuid):
         for i in indexes.flatten():
             x, y, w, h = boxes[i]
             class_name = str(classes[class_ids[i]])
-            label.append(class_name)
+            if class_name not in label:
+                label.append(class_name)
 
             confidence = str(round(confidences[i], 2))
             color = colors[i]
@@ -91,7 +92,7 @@ def get_insects(path, media_root, from_number, uuid):
     cv2.imwrite(filename, img)
     # with open(filename, 'wb') as f:
     #     f.write(img)
-    return insects
+    return insects, label
 # cv2.imshow('Image', img)
 # cv2.waitKey(0)
 # cv2.destroyAllWindows()

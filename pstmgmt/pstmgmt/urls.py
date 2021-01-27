@@ -24,5 +24,7 @@ admin.site.index_title = "Welcome to Pest Management Admin Portal"
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('api.urls', namespace='apis') )
+    path('api/', include('api.urls', namespace='apis')),
+    path('insect/', include('insect.urls', namespace='insect')),
+    path('signup/', include('signup.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
